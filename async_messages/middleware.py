@@ -1,9 +1,13 @@
 from django.contrib import messages
+try:
+    from django.utils.deprecation import MiddlewareMixin
+except ImportError:
+    MiddlewareMixin = object
 
 from async_messages import get_messages
 
 
-class AsyncMiddleware(object):
+class AsyncMiddleware(MiddlewareMixin):
 
     def process_response(self, request, response):
         """
